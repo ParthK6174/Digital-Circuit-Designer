@@ -12,10 +12,14 @@ Choose one of these circuits when the program starts:
 | --- | --- | --- |
 | `1` | Two-input AND | `OutputAND` |
 | `2` | Two-input OR | `OutputOR` |
-| `3` | Two-input XOR | `OutputXOR` |
-| `4` | One-bit half adder | `Sum`, `Carry` |
+| `3` | One-input NOT | `OutputNOT` |
+| `4` | Two-input NOR | `OutputNOR` |
+| `5` | Two-input XOR | `OutputXOR` |
+| `6` | One-bit half adder | `Sum`, `Carry` |
+| `7` | One-bit full adder | `Sum`, `Cout` |
+| `8` | Two-bit combinational shifter | `Out0`, `Out1` |
 
-The AND, OR, and XOR gates are built from NAND gates. The half adder combines an XOR circuit for its sum with an AND circuit for its carry.
+All logic gates (AND, OR, NOT, NOR, XOR), multiplexers, adders, and shifters are constructed modularly using universal NAND gates. The half adder combines XOR and AND; the full adder combines two half adders and an OR gate; and the 2-bit shifter uses 2:1 multiplexers built from NAND gates.
 
 ## Build and start
 
