@@ -67,6 +67,7 @@ The program writes `simulation_results.csv` to the directory where you started i
 ├── Main/          # Program entry point and interactive menu
 ├── Output/        # Output display interface and CSV writer
 ├── Simulation/    # Event queue used to propagate signal changes
+├── Testing/       # Automated component test scripts
 ├── Makefile       # Build, run, and clean commands
 └── README.md
 ```
@@ -77,8 +78,21 @@ The program writes `simulation_results.csv` to the directory where you started i
 | --- | --- |
 | `make` | Builds `simulator.exe` |
 | `make run` | Builds if necessary, then starts the simulator |
+| `make test` | Runs automated tests for all circuit components |
 | `make clean` | Removes object files, the executable, and the generated CSV |
 
-## Current scope
+## Testing
 
-This version focuses on the interactive combinational circuits listed above and CSV export. Larger examples mentioned in the problem statement—such as counters or more complex circuits—and its multithreading stretch goal are not implemented yet.
+Run all automated component tests:
+
+```sh
+make test
+```
+
+Or run any individual component script directly:
+
+```sh
+./Testing/test_and.sh
+./Testing/test_full_adder.sh
+```
+

@@ -29,17 +29,10 @@ run: $(TARGET)
 test: $(TARGET)
 	./Testing/run_all_tests.sh
 
-# Run only level 1 basic gate tests
-test-l1: $(TARGET)
-	./Testing/test_level1_circuits.sh
-
-# Run only level 2 subcircuit tests
-test-l2: $(TARGET)
-	./Testing/test_level2_circuits.sh
-
 # Clean build artifacts
 clean:
 	$(RM) $(OBJS) $(TARGET) simulation_results.csv
 
-.PHONY: all run clean test test-l1 test-l2
+.PHONY: all run clean test
+
 
