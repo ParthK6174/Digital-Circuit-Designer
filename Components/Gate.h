@@ -5,8 +5,8 @@
 #include "Wire.h"
 
 /**
- * Abstract base class for logic gates.
- * Automatically registers itself as a listener to its input wires in the constructor.
+ Abstract base class for logic gates.
+ Automatically registers itself as a listener to its input wires in the constructor.
  */
 class Gate : public CircuitElement {
 protected:
@@ -19,11 +19,7 @@ public:
     virtual ~Gate() = default;
 };
 
-/**
- * Concrete 2-input NAND Gate.
- * Logic: out = !(in1 && in2)
- */
-class NandGate : public Gate {
+class NandGate : public Gate { // output = !(input1 && input2)
 public:
     NandGate(Wire* input1, Wire* input2, Wire* output);
     void evaluate() override;

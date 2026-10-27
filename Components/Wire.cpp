@@ -13,10 +13,12 @@ void Wire::addListener(CircuitElement* element) {
         listeners.push_back(element);
     }
 }
+//listener will then contain all the gates connected to that particular wire
 
 void Wire::set(bool val) {
-    if (val != state) {
-        state = val;
+    if (val != state)//checks whetere the state is updated or not 
+    {
+        state = val; //updates the state
         if (eventQueue != nullptr) {
             for (CircuitElement* listener : listeners) {
                 eventQueue->schedule(listener);
@@ -24,6 +26,7 @@ void Wire::set(bool val) {
         }
     }
 }
+
 
 bool Wire::get() const {
     return state;

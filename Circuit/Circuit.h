@@ -10,10 +10,6 @@
 
 class EventQueue;
 
-/**
- * Composite container acting as the lifecycle/memory manager for all
- * dynamically allocated wires and gates. Prevents memory leaks upon destruction.
- */
 class Circuit {
 private:
     std::vector<CircuitElement*> elements;
@@ -38,12 +34,6 @@ public:
     Wire* createWire(EventQueue* eq, bool initialState = false, const std::string& name = "Wire");
     NandGate* createNandGate(Wire* in1, Wire* in2, Wire* out);
 
-    template <typename T, typename... Args>
-    T* createElement(Args&&... args) {
-        T* elem = new T(std::forward<Args>(args)...);
-        elements.push_back(elem);
-        return elem;
-    }
 };
 
 #endif // CIRCUIT_H

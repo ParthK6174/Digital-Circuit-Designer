@@ -2,14 +2,14 @@
 #define EVENT_QUEUE_H
 
 #include <queue>
-#include <cstddef>
 
 class CircuitElement;
 
-/**
+/*
  * EventQueue manages the FIFO scheduling and execution of circuit element evaluations.
  * Whenever a wire's state transitions, connected elements are pushed here.
- */
+*/
+
 class EventQueue {
 private:
     std::queue<CircuitElement*> queue;

@@ -6,42 +6,45 @@
 #include "Gate.h"
 #include "CSVOutput.h"
 #include "CircuitBuilders.h"
+using namespace std;
 
 int main() {
-    // 1. Instantiate the EventQueue and top-level Circuit container
+    // 1. Instantiate the EventQueue and top-level Circuit 
     EventQueue eq;
     Circuit topCircuit;
 
     // 2. Interactive Circuit Selection Menu
-    std::cout << "======================================================\n";
-    std::cout << "      Digital Electronics Circuit Simulator           \n";
-    std::cout << "======================================================\n";
-    std::cout << "Select circuit to simulate:\n";
-    std::cout << "  1. AND\n";
-    std::cout << "  2. OR\n";
-    std::cout << "  3. NOT\n";
-    std::cout << "  4. NOR\n";
-    std::cout << "  5. XOR\n";
-    std::cout << "  6. Half Adder\n";
-    std::cout << "  7. Full Adder\n";
-    std::cout << "  8. 2-Bit Shifter\n";
-    std::cout << "Enter choice (1-8): ";
+    cout << "======================================================\n";
+    cout << "      Digital Electronics Circuit Simulator           \n";
+    cout << "======================================================\n";
+    cout << "Select circuit to simulate:\n";
+    cout << "  1. AND\n";
+    cout << "  2. OR\n";
+    cout << "  3. NOT\n";
+    cout << "  4. NOR\n";
+    cout << "  5. XOR\n";
+    cout << "  6. Half Adder\n";
+    cout << "  7. Full Adder\n";
+    cout << "  8. 2-Bit Shifter\n";
+    cout << "Enter choice (1-8): ";
 
-    int choice = 1;
-    if (!(std::cin >> choice) || choice < 1 || choice > 8) {
-        std::cerr << "Invalid choice. Exiting.\n";
+    int choice = 0;
+    cin >> choice;
+    if(choice < 1 || choice > 8){
+        cout << "Invalid choice.";
         return 1;
     }
+    
 
     // 3. Instantiate CSVOutput
     CSVOutput csvOutput("simulation_results.csv");
 
     // 4. Primary input wire list for the simulation loop
-    std::vector<Wire*> inputWires;
+    vector<Wire*> inputWires;
 
     // 5. Dynamically instantiate outputs and build chosen circuit
     if (choice == 1) {
-        std::cout << "\n[Configured Circuit: 2-Input AND Gate]\n";
+        cout << "\n[Configured Circuit: 2-Input AND Gate]\n";
         Wire* wireA = topCircuit.createWire("InputA", &eq, false);
         Wire* wireB = topCircuit.createWire("InputB", &eq, false);
         Wire* wireOut = topCircuit.createWire("OutputAND", &eq, false);
@@ -51,8 +54,9 @@ int main() {
         csvOutput.watchWire(wireA);
         csvOutput.watchWire(wireB);
         csvOutput.watchWire(wireOut);
-    } else if (choice == 2) {
-        std::cout << "\n[Configured Circuit: 2-Input OR Gate]\n";
+    } 
+    else if (choice == 2) {
+        cout << "\n[Configured Circuit: 2-Input OR Gate]\n";
         Wire* wireA = topCircuit.createWire("InputA", &eq, false);
         Wire* wireB = topCircuit.createWire("InputB", &eq, false);
         Wire* wireOut = topCircuit.createWire("OutputOR", &eq, false);
@@ -62,16 +66,18 @@ int main() {
         csvOutput.watchWire(wireA);
         csvOutput.watchWire(wireB);
         csvOutput.watchWire(wireOut);
-    } else if (choice == 3) {
-        std::cout << "\n[Configured Circuit: 1-Input NOT Gate]\n";
+    } 
+    else if (choice == 3) {
+        cout << "\n[Configured Circuit: 1-Input NOT Gate]\n";
         Wire* wireA = topCircuit.createWire("InputA", &eq, false);
         Wire* wireOut = topCircuit.createWire("OutputNOT", &eq, true);
         buildNotGate(topCircuit, &eq, wireA, wireOut);
         inputWires.push_back(wireA);
         csvOutput.watchWire(wireA);
         csvOutput.watchWire(wireOut);
-    } else if (choice == 4) {
-        std::cout << "\n[Configured Circuit: 2-Input NOR Gate]\n";
+    } 
+    else if (choice == 4) {
+        cout << "\n[Configured Circuit: 2-Input NOR Gate]\n";
         Wire* wireA = topCircuit.createWire("InputA", &eq, false);
         Wire* wireB = topCircuit.createWire("InputB", &eq, false);
         Wire* wireOut = topCircuit.createWire("OutputNOR", &eq, true);
@@ -81,8 +87,9 @@ int main() {
         csvOutput.watchWire(wireA);
         csvOutput.watchWire(wireB);
         csvOutput.watchWire(wireOut);
-    } else if (choice == 5) {
-        std::cout << "\n[Configured Circuit: 2-Input XOR Gate]\n";
+    } 
+    else if (choice == 5) {
+        cout << "\n[Configured Circuit: 2-Input XOR Gate]\n";
         Wire* wireA = topCircuit.createWire("InputA", &eq, false);
         Wire* wireB = topCircuit.createWire("InputB", &eq, false);
         Wire* wireOut = topCircuit.createWire("OutputXOR", &eq, false);
@@ -92,8 +99,9 @@ int main() {
         csvOutput.watchWire(wireA);
         csvOutput.watchWire(wireB);
         csvOutput.watchWire(wireOut);
-    } else if (choice == 6) {
-        std::cout << "\n[Configured Circuit: 1-Bit Half Adder]\n";
+    } 
+    else if (choice == 6) {
+        cout << "\n[Configured Circuit: 1-Bit Half Adder]\n";
         Wire* wireA = topCircuit.createWire("InputA", &eq, false);
         Wire* wireB = topCircuit.createWire("InputB", &eq, false);
         Wire* wireSum = topCircuit.createWire("Sum", &eq, false);
@@ -105,8 +113,9 @@ int main() {
         csvOutput.watchWire(wireB);
         csvOutput.watchWire(wireSum);
         csvOutput.watchWire(wireCarry);
-    } else if (choice == 7) {
-        std::cout << "\n[Configured Circuit: 1-Bit Full Adder]\n";
+    } 
+    else if (choice == 7) {
+        cout << "\n[Configured Circuit: 1-Bit Full Adder]\n";
         Wire* wireA = topCircuit.createWire("InputA", &eq, false);
         Wire* wireB = topCircuit.createWire("InputB", &eq, false);
         Wire* wireCin = topCircuit.createWire("Cin", &eq, false);
@@ -121,8 +130,9 @@ int main() {
         csvOutput.watchWire(wireCin);
         csvOutput.watchWire(wireSum);
         csvOutput.watchWire(wireCout);
-    } else if (choice == 8) {
-        std::cout << "\n[Configured Circuit: 2-Bit Combinational Shifter]\n";
+    } 
+    else if (choice == 8) {
+        cout << "\n[Configured Circuit: 2-Bit Combinational Shifter]\n";
         Wire* wireShift = topCircuit.createWire("Shift", &eq, false);
         Wire* wireD0 = topCircuit.createWire("D0", &eq, false);
         Wire* wireD1 = topCircuit.createWire("D1", &eq, false);
@@ -146,35 +156,37 @@ int main() {
     int stepId = 1;
 
     if (inputWires.size() == 1) {
-        std::cout << "\nEnter 1 input (0 or 1) per line, or Ctrl+D/Ctrl+Z to exit:\n";
+        cout << "\nEnter 1 input (0 or 1) per line, or Ctrl+D/Ctrl+Z to exit:\n";
         int valA = 0;
-        while (std::cin >> valA) {
+        while (cin >> valA) {
             inputWires[0]->set(valA != 0);
             eq.processEvents();
             csvOutput.recordStep(stepId);
             stepId++;
         }
-    } else if (inputWires.size() == 2) {
-        std::cout << "\nEnter two inputs (0 or 1) separated by a space, or Ctrl+D/Ctrl+Z to exit:\n";
+    } 
+    else if (inputWires.size() == 2) {
+        cout << "\nEnter two inputs (0 or 1) separated by a space, or Ctrl+D/Ctrl+Z to exit:\n";
         int valA = 0;
         int valB = 0;
-        while (std::cin >> valA >> valB) {
+        while (cin >> valA >> valB) {
             inputWires[0]->set(valA != 0);
             inputWires[1]->set(valB != 0);
             eq.processEvents();
             csvOutput.recordStep(stepId);
             stepId++;
         }
-    } else if (inputWires.size() == 3) {
+    } 
+    else if (inputWires.size() == 3) {
         if (choice == 7) {
-            std::cout << "\nEnter three inputs (InputA InputB Cin) separated by spaces, or Ctrl+D/Ctrl+Z to exit:\n";
+            cout << "\nEnter three inputs (InputA InputB Cin) separated by spaces, or Ctrl+D/Ctrl+Z to exit:\n";
         } else {
-            std::cout << "\nEnter three inputs (Shift D0 D1) separated by spaces, or Ctrl+D/Ctrl+Z to exit:\n";
+            cout << "\nEnter three inputs (Shift D0 D1) separated by spaces, or Ctrl+D/Ctrl+Z to exit:\n";
         }
         int valA = 0;
         int valB = 0;
         int valC = 0;
-        while (std::cin >> valA >> valB >> valC) {
+        while (cin >> valA >> valB >> valC) {
             inputWires[0]->set(valA != 0);
             inputWires[1]->set(valB != 0);
             inputWires[2]->set(valC != 0);
@@ -184,8 +196,8 @@ int main() {
         }
     }
 
-    std::cout << "\nSimulation finished.\n";
-    std::cout << "Results exported to 'simulation_results.csv'.\n";
+    cout << "\nSimulation finished.\n";
+    cout << "Results exported to 'simulation_results.csv'.\n";
 
     return 0;
 }

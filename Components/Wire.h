@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+using namespace std;
 
 class CircuitElement;
 class EventQueue;
@@ -13,34 +14,24 @@ class EventQueue;
  */
 class Wire {
 private:
-    std::string name;
-    bool state;
+    string name; //lable of the particular wire
+    bool state; //curent physical voltage(0 or 1)
     EventQueue* eventQueue;
-    std::vector<CircuitElement*> listeners;
+    vector<CircuitElement*> listeners; //list of all gates plugged into this specific wire
 
 public:
-    Wire(const std::string& wireName, EventQueue* eq, bool initialState = false);
-    Wire(EventQueue* eq, bool initialState = false, const std::string& wireName = "Wire");
+    //Constructors
+    Wire(const string& wireName, EventQueue* eq, bool initialState = false); //for creating custom named wire while ignoring init. state 
+    Wire(EventQueue* eq, bool initialState = false, const string& wireName = "Wire"); //when we dont want to enter wire name manually
 
-    /**
-     * Subscribes a downstream CircuitElement to observe state changes on this wire.
-     */
-    void addListener(CircuitElement* element);
+    //Member Functions
+    void addListener(CircuitElement* element); //Subscribes a downstream CircuitElement to observe state changes on this wire. Contains all the gates connected to that particular wire
 
-    /**
-     * Sets the wire's signal value. Schedules listeners only on actual state transition.
-     */
-    void set(bool val);
+    void set(bool val); //Sets the wire's signal value. Schedules listeners only on actual state transition.
 
-    /**
-     * Retrieves current binary state of the wire.
-     */
-    bool get() const;
+    bool get() const; //Retrieves current binary state of the wire.
 
-    /**
-     * Retrieves wire identifier name.
-     */
-    const std::string& getName() const;
+    const string& getName() const; //Retrieves wire identifier name.
 };
 
 #endif // WIRE_H
